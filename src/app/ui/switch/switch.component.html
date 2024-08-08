@@ -1,0 +1,6 @@
+<label class="switch" [ngClass]="size">
+  <input  #el
+         (blur)="onTouched()"
+         (change)="onChange($any($event).target.checked)" type="checkbox">
+  <span class="slider round"></span>
+</label>

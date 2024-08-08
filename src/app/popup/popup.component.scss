@@ -1,0 +1,14 @@
+.popup {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background: #1c1f24;
+  font-size: 20px;
+  color: #fff;
+  height: 100%;
+
+  &__title {
+    font-weight: 700;
+    text-align: center;
+  }
+}
