@@ -1,14 +1,31 @@
 .popup {
   display: flex;
-  flex-direction: column;
-  padding: 20px;
+  padding: 15px;
+  gap: 20px;
+  font-size: 14px;
   background: #1c1f24;
-  font-size: 20px;
   color: #fff;
-  height: 100%;
+
+  &__logo img {
+    height: 60px;
+  }
+
+  &__main {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: space-between;
+  }
 
   &__title {
     font-weight: 700;
+    font-size: 20px;
     text-align: center;
+  }
+
+  &__controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 }

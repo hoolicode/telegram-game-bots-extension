@@ -4,6 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "chrome-extension:build": "npx ts-node scripts/build-chrome-extension.ts",
     "build": "ng build --base-href /index.html?/",
     "watch": "ng build --watch --configuration development --base-href /index.html?/",
     "prettier": "prettier --write 'src/**/*.(ts|html|scss)'",
@@ -33,6 +34,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "nodemon": "^3.1.4",
     "prettier": "^3.3.3",
     "typescript": "~5.5.2"
   }

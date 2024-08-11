@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,400,700&display=swap');
 
 body {
   cursor: default;
@@ -11,8 +11,8 @@ body {
   -webkit-overflow-scrolling: touch !important;
 }
 
-body, html {
-  height: 100%;
+body,
+html {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
 }

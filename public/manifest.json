@@ -1,16 +1,30 @@
 {
   "manifest_version": 3,
-  "name": "Hamster Combat Extension",
+  "name": "Hamster Combat Web Extension",
   "version": "1.0.0",
   "description": "",
   "permissions": [
+    "activeTab",
+    "scripting"
   ],
   "action": {
     "default_popup": "index.html"
   },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": [
+        "content.js"
+      ],
+      "matches": [
+        "https://web.telegram.org/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
   "icons": {
-    "16": "16x16.png",
-    "48": "images/icon-48.png",
-    "128": "images/icon-128.png"
+    "16": "images/16.png",
+    "48": "images/48.png",
+    "128": "images/128.png"
   }
 }
