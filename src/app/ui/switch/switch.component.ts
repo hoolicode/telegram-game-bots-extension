@@ -1,8 +1,6 @@
-import { Component, ElementRef, forwardRef, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, forwardRef, Renderer2, ViewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { NgClass } from '@angular/common';
-
-type SwitchSize = 'mini' | 'default';
 
 @Component({
   selector: 'app-switch',
@@ -22,8 +20,6 @@ export class SwitchComponent implements ControlValueAccessor {
   onChange = (_: any) => {};
   onTouched = () => {};
   @ViewChild('el', { static: true }) el!: ElementRef;
-
-  @Input() size: SwitchSize = 'default';
 
   constructor(private _renderer: Renderer2) {}
 

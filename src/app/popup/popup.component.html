@@ -6,7 +6,9 @@
     <div class="popup__title">Hamster Combat Web</div>
     <div class="popup__controls">
       Enable extension
-      <app-switch size="mini" />
+      <app-switch
+        [ngModel]="configService.enabled$ | async"
+        (ngModelChange)="$event ? configService.enable() : configService.disable()" />
     </div>
   </div>
 </div>
