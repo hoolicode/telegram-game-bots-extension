@@ -1,4 +1,7 @@
 import { mutationObserver } from './observers/mutation-observer';
+import { combineLatest, filter } from 'rxjs';
+import { ConfigService } from '../app/services/configs/configs.service';
+import { StorageService } from '../app/services/storage/storage.service';
 
 export const changeTgWebAppPlatform = (node: ChildNode) => {
   if (node.childNodes.length) {
@@ -16,18 +19,24 @@ export const changeTgWebAppPlatform = (node: ChildNode) => {
 };
 
 const contentLoadedHandler = () => {
-  mutationObserver(document.body, {
-    childList: true,
-    subtree: true,
-  }).subscribe(mutations => {
-    mutations.forEach(function (mutation) {
-      mutation.addedNodes.forEach(function (mutationNode) {
-        mutationNode.childNodes.forEach(mutationChildNode => {
-          changeTgWebAppPlatform(mutationChildNode);
+  const configService = new ConfigService(new StorageService());
+  combineLatest([
+    mutationObserver(document.body, {
+      childList: true,
+      subtree: true,
+    }),
+    configService.enabled$,
+  ])
+    .pipe(filter(([, enabled]) => enabled))
+    .subscribe(([mutations]) => {
+      mutations.forEach(function (mutation) {
+        mutation.addedNodes.forEach(function (mutationNode) {
+          mutationNode.childNodes.forEach(mutationChildNode => {
+            changeTgWebAppPlatform(mutationChildNode);
+          });
         });
       });
     });
-  });
 };
 
 if (document.readyState !== 'loading') {

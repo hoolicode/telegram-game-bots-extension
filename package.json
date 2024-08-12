@@ -5,7 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "chrome-extension:build": "npx ts-node scripts/build-chrome-extension.ts",
-    "build": "ng build --base-href /index.html?/",
+    "build": "ng build --base-href /index.html?/ && npm run chrome-extension:build",
     "watch": "ng build --watch --configuration development --base-href /index.html?/",
     "prettier": "prettier --write 'src/**/*.(ts|html|scss)'",
     "test": "ng test"

@@ -44,12 +44,6 @@ export class StorageService {
       );
 
     return storageChanges$.pipe(
-      // tap(([changes]) => {
-      //   console.log(`changes  `, JSON.stringify(changes));
-      //   for (let [key, { oldValue, newValue }] of Object.entries(changes)) {
-      //     console.log(`Storage key "${key}"  `, `Old value was "${oldValue}", new value is "${newValue}".`);
-      //   }
-      // }),
       map(([changes]) => changes?.[keyName]?.newValue as T),
       filter(newValue => newValue !== undefined),
     );

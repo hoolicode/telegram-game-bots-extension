@@ -1,6 +1,6 @@
 <div class="popup">
   <div class="popup__logo">
-    <img src="images/logo-full.png" alt="" />
+    <img src="images/logo-full.png" alt=""/>
   </div>
   <div class="popup__main">
     <div class="popup__title">Hamster Combat Web</div>
@@ -8,7 +8,7 @@
       Enable extension
       <app-switch
         [ngModel]="configService.enabled$ | async"
-        (ngModelChange)="$event ? configService.enable() : configService.disable()" />
+        (ngModelChange)="$event ? configService.enable() : configService.disable()"/>
     </div>
   </div>
 </div>

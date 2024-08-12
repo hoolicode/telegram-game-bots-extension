@@ -1,7 +1,6 @@
-import { DestroyRef, inject, Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { StorageService } from '../storage/storage.service';
-import { BehaviorSubject, map, merge, tap } from 'rxjs';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { BehaviorSubject, map, merge, Subject, takeUntil, tap } from 'rxjs';
 
 export class ExtensionConfig {
   enabled = true;
@@ -12,28 +11,32 @@ export const storageKey = 'config';
 @Injectable({
   providedIn: 'root',
 })
-export class ConfigService {
-  readonly #storage = inject(StorageService);
-  readonly #destroyRef = inject(DestroyRef);
+export class ConfigService implements OnDestroy {
   readonly enabled$ = new BehaviorSubject<boolean>(true);
+  private readonly destroyRef$ = new Subject();
 
-  constructor() {
+  constructor(private readonly storageService: StorageService) {
     merge(
-      this.#storage.get<ExtensionConfig>(storageKey).pipe(map(items => items[storageKey])),
-      this.#storage.onChange<ExtensionConfig>(storageKey),
+      this.storageService.get<ExtensionConfig>(storageKey).pipe(map(items => items[storageKey])),
+      this.storageService.onChange<ExtensionConfig>(storageKey),
     )
       .pipe(
         tap(config => this.enabled$.next(config.enabled)),
-        takeUntilDestroyed(this.#destroyRef),
+        takeUntil(this.destroyRef$),
       )
       .subscribe();
   }
 
+  ngOnDestroy(): void {
+    this.destroyRef$.next(null);
+    this.destroyRef$.complete();
+  }
+
   enable() {
-    this.#storage.set({ [storageKey]: { enabled: true } });
+    this.storageService.set({ [storageKey]: { enabled: true } });
   }
 
   disable() {
-    this.#storage.set({ [storageKey]: { enabled: false } });
+    this.storageService.set({ [storageKey]: { enabled: false } });
   }
 }

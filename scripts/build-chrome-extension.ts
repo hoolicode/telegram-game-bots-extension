@@ -5,7 +5,7 @@ async function buildBackgroundScript(): Promise<unknown> {
     entryPoints: ['src/extension/content.ts'],
     bundle: true,
     write: true,
-    outdir: 'dist/hamster-combat-extension/browser/'
+    outdir: 'dist/hamster-combat-extension/browser/',
   });
 }
 
@@ -19,4 +19,4 @@ async function buildChromeExtension(): Promise<void> {
   }
 }
 
-buildChromeExtension();
+void buildChromeExtension();
