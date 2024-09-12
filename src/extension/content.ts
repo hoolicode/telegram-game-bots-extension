@@ -1,40 +1,63 @@
 import { mutationObserver } from './observers/mutation-observer';
-import { combineLatest, filter } from 'rxjs';
+import { BehaviorSubject, combineLatest, withLatestFrom } from 'rxjs';
 import { ConfigService } from '../app/services/configs/configs.service';
 import { StorageService } from '../app/services/storage/storage.service';
 
-export const changeTgWebAppPlatform = (node: ChildNode) => {
-  if (node.childNodes.length) {
-    for (let i = 0; i < node.childNodes.length; i++) {
-      changeTgWebAppPlatform(node.childNodes[i]);
-    }
-  } else if (
-    (node as HTMLElement).tagName === 'IFRAME' &&
-    (node as HTMLIFrameElement).src.includes('tgWebAppPlatform=web')
-  ) {
-    console.info('tgWebAppPlatform updated');
-    const iframe = node as HTMLIFrameElement;
-    iframe.src = iframe.src.replace('tgWebAppPlatform=web', 'tgWebAppPlatform=android');
-  }
-};
-
 const contentLoadedHandler = () => {
   const configService = new ConfigService(new StorageService());
+  const hamsterWindowRef$ = new BehaviorSubject<Window | null>(null);
+  let href: null | Window = null;
+
   combineLatest([
     mutationObserver(document.body, {
       childList: true,
       subtree: true,
     }),
-    configService.enabled$,
+    configService.config$,
   ])
-    .pipe(filter(([, enabled]) => enabled))
-    .subscribe(([mutations]) => {
-      mutations.forEach(function (mutation) {
-        mutation.addedNodes.forEach(function (mutationNode) {
-          mutationNode.childNodes.forEach(mutationChildNode => {
-            changeTgWebAppPlatform(mutationChildNode);
+    .pipe(withLatestFrom(hamsterWindowRef$))
+    .subscribe(([[mutations, config], hamsterWindowRef]) => {
+      // console.error('[mutations, config]', [mutations, config, hamsterWindowRef]);
+      mutations.forEach(mutation => {
+        if (mutation.addedNodes.length) {
+          mutation.addedNodes.forEach(node => {
+            if (node.nodeName === 'IFRAME') {
+              const iframe = node as HTMLIFrameElement;
+              if (iframe.src.indexOf('tgWebAppPlatform=') !== -1) {
+                const iframe = node as HTMLIFrameElement;
+                const platform = config?.enabled ? 'android' : 'web';
+                const url = iframe.src.replace(/tgWebAppPlatform=[a-z]+?&/, `tgWebAppPlatform=${platform}&`);
+
+                if (config?.enabled && config?.hamsterInWindow && iframe.src.indexOf('hamsterkombatgame.io') !== -1) {
+                  const { top, left, width, height } = iframe.getBoundingClientRect();
+                  // ref = window.open(
+                  //   src,
+                  //   '_blank',
+                  //   `menubar=no,location=no,toolbar=no,scrollbars=yes,resizable=yes,top=${top},left=${left},width=${width},height=${height}`,
+                  // );
+
+                  // Send a message to background script to open a new window
+                  chrome.runtime.sendMessage(
+                    {
+                      action: 'openWindow',
+                      url, // Change to desired URL
+                      top: top,
+                      left: left,
+                      width: width,
+                      height: height,
+                    },
+                    response => {
+                      console.log(response.status);
+                    },
+                  );
+                } else {
+                  iframe.src = url;
+                }
+                console.log('tgWebAppPlatform updated!');
+              }
+            }
           });
-        });
+        }
       });
     });
 };

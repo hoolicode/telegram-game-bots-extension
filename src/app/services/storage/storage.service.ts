@@ -1,18 +1,20 @@
 /// <reference types="chrome"/>
 import { Injectable } from '@angular/core';
-import { filter, from as fromPromise, fromEventPattern, map, Observable } from 'rxjs';
+import { filter, from, fromEventPattern, map, merge, Observable, Subject, switchMap, withLatestFrom } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
-export class StorageService {
+export class StorageService<T = object> {
+  public readonly setState$ = new Subject<T>();
+
   get<T>(key: string[] | string): Observable<Record<string, T>> {
-    return fromPromise<PromiseLike<Record<string, T>>>(
-      new Promise((resolve, reject) => {
+    return from(
+      new Promise<Record<string, T>>((resolve, reject) => {
         chrome.storage.local.get(key, (items: Record<string, T>) => {
           if (chrome.runtime.lastError) {
             console.warn(chrome.runtime.lastError.message);
-            reject();
+            reject(new Error(chrome.runtime.lastError.message));
           } else {
             resolve(items);
           }
@@ -22,12 +24,12 @@ export class StorageService {
   }
 
   set<T>(keyValue: Record<string, T>): Observable<boolean> {
-    return fromPromise(
+    return from(
       new Promise<boolean>((resolve, reject) => {
         chrome.storage.local.set(keyValue, () => {
           if (chrome.runtime.lastError) {
             console.warn(chrome.runtime.lastError.message);
-            reject(false);
+            reject(new Error(chrome.runtime.lastError.message));
           } else {
             resolve(true);
           }
@@ -37,15 +39,23 @@ export class StorageService {
   }
 
   onChange<T>(keyName: string): Observable<T> {
-    const storageChanges$: Observable<[Record<string, chrome.storage.StorageChange>, chrome.storage.AreaName]> =
-      fromEventPattern(
-        handler => chrome.storage.onChanged.addListener(handler),
-        handler => chrome.storage.onChanged.removeListener(handler),
-      );
+    return fromEventPattern<[Record<string, chrome.storage.StorageChange>, chrome.storage.AreaName]>(
+      handler => chrome.storage.onChanged.addListener(handler),
+      handler => chrome.storage.onChanged.removeListener(handler),
+    ).pipe(
+      map(([changes]) => changes[keyName]?.newValue as T),
+      filter((newValue): newValue is T => newValue !== undefined),
+    );
+  }
 
-    return storageChanges$.pipe(
-      map(([changes]) => changes?.[keyName]?.newValue as T),
-      filter(newValue => newValue !== undefined),
+  getState<T>(keyName: string, defaultState: T): Observable<T> {
+    return merge(this.get<T>(keyName).pipe(map(items => items[keyName] || defaultState)), this.onChange<T>(keyName));
+  }
+
+  updateState<T>(keyName: string, defaultState: T): Observable<boolean> {
+    return this.setState$.asObservable().pipe(
+      withLatestFrom(this.getState(keyName, defaultState)),
+      switchMap(([updatedConfig, config]) => this.set({ [keyName]: { ...config, ...updatedConfig } })),
     );
   }
 }

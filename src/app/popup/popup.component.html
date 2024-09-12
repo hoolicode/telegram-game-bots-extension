@@ -5,10 +5,17 @@
   <div class="popup__main">
     <div class="popup__title">Hamster Combat Web</div>
     <div class="popup__controls">
-      Enable extension
+      <span>Enable extension</span>
       <app-switch
-        [ngModel]="configService.enabled$ | async"
-        (ngModelChange)="$event ? configService.enable() : configService.disable()"/>
+        [ngModel]="config()?.enabled"
+        (ngModelChange)="configService.setState$.next({ enabled: $event})"/>
+    </div>
+    <div class="popup__controls">
+      <span>Open Hamster Combat in a separate window to support mini-games</span>
+      <app-switch
+        [ngModel]="config()?.hamsterInWindow"
+        [disabled]="!config()?.enabled"
+        (ngModelChange)="configService.setState$.next({ hamsterInWindow: $event})"/>
     </div>
   </div>
 </div>

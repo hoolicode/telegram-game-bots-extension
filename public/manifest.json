@@ -1,13 +1,15 @@
 {
   "manifest_version": 3,
   "name": "Hamster Combat Web Extension",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Hamster Combat Telegram Bot runs on the Web.",
   "permissions": [
-    "activeTab",
-    "scripting",
-    "storage"
+    "storage",
+    "tabs"
   ],
+  "background": {
+    "service_worker": "background.js"
+  },
   "action": {
     "default_popup": "index.html"
   },

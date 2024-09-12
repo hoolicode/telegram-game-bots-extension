@@ -1,29 +1,40 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { StorageService } from '../storage/storage.service';
-import { BehaviorSubject, map, merge, Subject, takeUntil, tap } from 'rxjs';
+import { Observable, Subject, takeUntil } from 'rxjs';
 
-export class ExtensionConfig {
+class ExtensionConfigState {
   enabled = true;
+  hamsterInWindow = false;
 }
 
-export const storageKey = 'config';
+export const storageKey = 'configV2';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ConfigService implements OnDestroy {
-  readonly enabled$ = new BehaviorSubject<boolean>(true);
   private readonly destroyRef$ = new Subject();
+  readonly config$: Observable<ExtensionConfigState>;
+  readonly setState$: Subject<Partial<ExtensionConfigState>>;
 
   constructor(private readonly storageService: StorageService) {
-    merge(
-      this.storageService.get<ExtensionConfig>(storageKey).pipe(map(items => items[storageKey])),
-      this.storageService.onChange<ExtensionConfig>(storageKey),
-    )
-      .pipe(
-        tap(config => this.enabled$.next(config.enabled)),
-        takeUntil(this.destroyRef$),
-      )
+    this.config$ = this.storageService.getState(storageKey, new ExtensionConfigState());
+    this.setState$ = this.storageService.setState$;
+
+    // this.config$
+    //   .pipe(
+    //     tap(config => {
+    //       console.error('storage xxx', JSON.stringify(config));
+    //       // this.enabled$.next(config.enabled);
+    //       // this.hamsterInWindow$.next(config.hamsterInWindow);
+    //     }),
+    //     takeUntil(this.destroyRef$),
+    //   )
+    //   .subscribe();
+
+    this.storageService
+      .updateState(storageKey, new ExtensionConfigState())
+      .pipe(takeUntil(this.destroyRef$))
       .subscribe();
   }
 
@@ -32,11 +43,12 @@ export class ConfigService implements OnDestroy {
     this.destroyRef$.complete();
   }
 
-  enable() {
-    this.storageService.set({ [storageKey]: { enabled: true } });
-  }
-
-  disable() {
-    this.storageService.set({ [storageKey]: { enabled: false } });
-  }
+  //
+  // enableChange(enabled: boolean) {
+  //   this.storageService.set({ [storageKey]: { enabled } });
+  // }
+  //
+  // hamsterInWindowChange(hamsterInWindow: boolean) {
+  //   this.storageService.set({ [storageKey]: { hamsterInWindow } });
+  // }
 }

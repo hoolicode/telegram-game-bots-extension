@@ -48,6 +48,10 @@ input:checked + .slider {
   background-color: #febc3d;
 }
 
+input:disabled + .slider {
+  background-color: #c0c0c0;
+}
+
 input:checked + .slider:before {
   transform: translateX(19px);
 }
