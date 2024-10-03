@@ -5,7 +5,7 @@
   "description": "Hamster Combat Telegram Bot runs on the Web.",
   "permissions": [
     "storage",
-    "tabs"
+    "windows"
   ],
   "background": {
     "service_worker": "background.js"
