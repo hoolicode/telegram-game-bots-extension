@@ -2,7 +2,7 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { StorageService } from '../storage/storage.service';
 import { Observable, Subject, takeUntil } from 'rxjs';
 
-class ExtensionConfigState {
+export class ExtensionConfigState {
   enabled = true;
   hamsterInWindow = false;
 }
