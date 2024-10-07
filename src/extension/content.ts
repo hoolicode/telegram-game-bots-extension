@@ -32,7 +32,7 @@ const contentLoadedHandler = () => {
                 top: top,
                 left: left,
                 width: width,
-                height: +height + 50,
+                height: +height + 80,
               },
               response => {
                 console.log(response.status);

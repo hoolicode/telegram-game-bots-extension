@@ -39,15 +39,6 @@
         "https://web.telegram.org/*"
       ],
       "run_at": "document_end"
-    },
-    {
-      "matches": [
-        "<all_urls>"
-      ],
-      "js": [
-        "contentScript.js"
-      ],
-      "run_at": "document_start"
     }
   ],
   "icons": {
