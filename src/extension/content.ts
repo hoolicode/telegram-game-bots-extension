@@ -17,10 +17,11 @@ const contentLoadedHandler = () => {
       if (node.nodeName === 'IFRAME') {
         const iframe = node as HTMLIFrameElement;
         if (iframe.src.indexOf('tgWebAppPlatform=') !== -1) {
-          const platform = config?.enabled ? 'android' : 'web';
+          const platform = config?.enabled ? 'ios' : 'web';
           const url = iframe.src.replace(/tgWebAppPlatform=[a-z]+?&/, `tgWebAppPlatform=${platform}&`);
 
-          if (config?.enabled && config?.hamsterInWindow && iframe.src.indexOf('hamsterkombatgame.io') !== -1) {
+          if (config?.enabled && config?.hamsterInWindow) {
+            //  && iframe.src.indexOf('hamsterkombatgame.io') !== -1
             const { top, left, width, height } = iframe.getBoundingClientRect();
 
             // Send a message to background script to open a new window
@@ -31,7 +32,7 @@ const contentLoadedHandler = () => {
                 top: top,
                 left: left,
                 width: width,
-                height: height,
+                height: +height + 50,
               },
               response => {
                 console.log(response.status);
