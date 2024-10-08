@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Hamster Combat Web Extension",
+  "name": "Hamster Combat: Telegram bots games on the web",
   "version": "1.2.0",
-  "description": "Hamster Combat Telegram Bot runs on the Web.",
+  "description": "Allows you to run Telegram bots games on the web. Emulate a mobile platform.",
   "permissions": [
     "storage",
     "windows",
@@ -12,7 +12,7 @@
     "activeTab"
   ],
   "host_permissions": [
-    "<all_urls>"
+    "https://telegram.blum.codes/*"
   ],
   "declarative_net_request": {
     "rule_resources": [

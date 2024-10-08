@@ -34,8 +34,8 @@ function createNewWindow(message: any, sendResponse: (res?: any) => void) {
       height: Math.round(message.height),
     },
     newWindow => {
-      if (newWindow && newWindow.tabs && newWindow.tabs.length > 0) {
-        const tabId = newWindow.tabs[0].id; // Получаем tabId первой вкладки
+      if (newWindow?.tabs?.length) {
+        const tabId = newWindow.tabs[0].id;
 
         openWindowRef = newWindow.id || null;
 
