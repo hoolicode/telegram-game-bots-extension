@@ -1,10 +1,19 @@
 .popup {
   display: flex;
-  padding: 15px;
+  padding: 10px 10px 20px;
   gap: 20px;
   font-size: 14px;
   background: #1c1f24;
   color: #fff;
+  //max-width: 340px;
+  flex-direction: column;
+
+  &__header {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: space-between;
+  }
 
   &__logo {
     display: flex;
@@ -25,8 +34,13 @@
 
   &__title {
     font-weight: 500;
-    font-size: 20px;
-    text-align: center;
+    font-size: 22px;
+    text-align: right;
+
+    span {
+      font-size: 16px;
+      color: #febc3d;
+    }
   }
 
   &__controls {
