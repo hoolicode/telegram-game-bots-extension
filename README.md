@@ -4,20 +4,20 @@ Unlock the fun of Telegram mobile games directly in your browser with this power
 
 ## 🚀 Key Features:
 
-✦ Mobile Platform Emulation: Bypass the platform restriction and enjoy Telegram bot games right in your browser.
-✦ Advanced Mobile Mode: For games that check for mobile devices, use an advanced debug mode that opens the game in a separate phone emulation window. (Note: Some features tied to Telegram API may not work in this mode.)
+- Mobile Platform Emulation: Bypass the platform restriction and enjoy Telegram bot games right in your browser.
+- Advanced Mobile Mode: For games that check for mobile devices, use an advanced debug mode that opens the game in a separate phone emulation window. (Note: Some features tied to Telegram API may not work in this mode.)
 
 ## 🚀 Games Confirmed to Work (as of October 9, 2024):
 
-✦ Hamster Combat (@hamster_kombat_bot) – Mini-games supported in debug mode.
-✦ Blum (@BlumCryptoBot)
-✦ Yandex Qlyuker (@qlyukerbot) – Works in a separate window.
-✦ W-Coin (@wcoin_tapbot) – Works in a separate window.
-✦ X Empire (@empirebot) – Works in a separate window.
-✦ Memefi (@memefi_coin_bot)
-✦ Booms (@booms_io_bot)
-✦ Rocky Rabbit (@rocky_rabbit_bot)
-✦ Treasure Tapper (@treasure_tapper_bot)
+- Hamster Combat (@hamster_kombat_bot) – Mini-games supported in debug mode.
+- Blum (@BlumCryptoBot)
+- Yandex Qlyuker (@qlyukerbot) – Works in a separate window.
+- W-Coin (@wcoin_tapbot) – Works in a separate window.
+- X Empire (@empirebot) – Works in a separate window.
+- Memefi (@memefi_coin_bot)
+- Booms (@booms_io_bot)
+- Rocky Rabbit (@rocky_rabbit_bot)
+- Treasure Tapper (@treasure_tapper_bot)
 
 ## Limitations:
 
