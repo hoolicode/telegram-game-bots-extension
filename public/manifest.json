@@ -8,8 +8,7 @@
     "windows",
     "declarativeNetRequest",
     "debugger",
-    "tabs",
-    "activeTab"
+    "tabs"
   ],
   "host_permissions": [
     "https://telegram.blum.codes/*"
