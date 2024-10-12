@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Telegram bots games on the web",
+  "name": "Telegram game bots on the web",
   "version": "1.2.0",
-  "description": "Allows you to run Telegram bots games on the web. Emulate a mobile platform.",
+  "description": "Allows you to run Telegram game bots on the web. Emulate a mobile platform.",
   "permissions": [
     "storage",
     "windows",

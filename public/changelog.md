@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.2.0] - 2024-09-10
+
+### Added
+
+- Added advanced mobile game emulation mode as a browser debug mode.
+
 ## [1.1.1] - 2024-03-10
 
 ### Fixed
