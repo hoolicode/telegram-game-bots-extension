@@ -9,6 +9,15 @@ async function buildContentScript(): Promise<unknown> {
   });
 }
 
+async function buildTelegramWebviewContentScript(): Promise<unknown> {
+  return esbuild.build({
+    entryPoints: ['src/extension/telegram-webview.ts'],
+    bundle: true,
+    write: true,
+    outdir: 'dist/hamster-combat-extension/browser/',
+  });
+}
+
 async function buildBackgroundScript(): Promise<unknown> {
   return esbuild.build({
     entryPoints: ['src/extension/background.ts'],
@@ -22,6 +31,7 @@ async function buildBackgroundScript(): Promise<unknown> {
 async function buildChromeExtension(): Promise<void> {
   try {
     await buildContentScript();
+    await buildTelegramWebviewContentScript();
     await buildBackgroundScript();
     console.info('Build completed successfully.');
   } catch (error) {

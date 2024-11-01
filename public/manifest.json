@@ -1,14 +1,13 @@
 {
   "manifest_version": 3,
   "name": "Telegram game bots on the web",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "Allows you to run Telegram game bots on the web. Emulate a mobile platform.",
   "permissions": [
     "storage",
     "windows",
     "declarativeNetRequest",
-    "debugger",
-    "tabs"
+    "debugger"
   ],
   "host_permissions": [
     "https://telegram.blum.codes/*"
@@ -38,6 +37,12 @@
         "https://web.telegram.org/*"
       ],
       "run_at": "document_end"
+    },
+    {
+      "matches": ["https://www.okx.com/*"],
+      "js": ["telegram-webview.js"],
+      "run_at": "document_start",
+      "world": "MAIN"
     }
   ],
   "icons": {

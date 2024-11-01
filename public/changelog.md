@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.3.0] - 2024-02-11
+
+### Added
+
+- Added support for TelegramWebviewProxy
+
+# Changelog
+
 ## [1.2.0] - 2024-09-10
 
 ### Added
