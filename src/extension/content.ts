@@ -1,4 +1,4 @@
-import { mutationObserver } from './observers/mutation-observer';
+import { mutationObserver } from '../app/utils/observers/mutation-observer';
 import { combineLatest } from 'rxjs';
 import { ConfigService, ExtensionConfigState } from '../app/services/configs/configs.service';
 import { StorageService } from '../app/services/storage/storage.service';
@@ -21,7 +21,6 @@ const contentLoadedHandler = () => {
           const url = iframe.src.replace(/tgWebAppPlatform=[a-z]+?&/, `tgWebAppPlatform=${platform}&`);
 
           if (config?.enabled && config?.hamsterInWindow) {
-            //  && iframe.src.indexOf('hamsterkombatgame.io') !== -1
             const { top, left, width, height } = iframe.getBoundingClientRect();
 
             // Send a message to background script to open a new window
