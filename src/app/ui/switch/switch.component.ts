@@ -7,7 +7,7 @@ import { NgClass } from '@angular/common';
   templateUrl: './switch.component.html',
   styleUrls: ['./switch.component.scss'],
   standalone: true,
-  imports: [NgClass],
+  imports: [],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

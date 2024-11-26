@@ -2,6 +2,9 @@
 
 Unlock the fun of Telegram mobile games directly in your browser with this powerful extension. Tired of seeing your favorite games like Hamster Combat or Rocky Rabbit not working on the web version of Telegram? This extension solves the problem by mimicking a mobile platform, letting you play these games hassle-free!
 
+[Telegram Bot Games Extention](https://chromewebstore.google.com/detail/telegram-game-bots-on-the/molgmnfknbgkokicpcolhkbknicelpni?authuser=0&hl=en-GB
+)
+
 ## 🚀 Key Features:
 
 - Mobile Platform Emulation: Bypass the platform restriction and enjoy Telegram bot games right in your browser.

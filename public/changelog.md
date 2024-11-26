@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.4.0] - 2024-26-11
+
+### Added
+
+- Updating the telegram page after installation.
+
+# Changelog
+
 ## [1.3.0] - 2024-02-11
 
 ### Added
