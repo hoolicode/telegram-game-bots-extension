@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Telegram game bots on the web",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "Allows you to run Telegram game bots on the web. Emulate a mobile platform.",
   "permissions": [
     "storage",
@@ -42,6 +42,13 @@
       "matches": ["https://www.okx.com/*"],
       "js": ["telegram-webview.js"],
       "run_at": "document_start",
+      "world": "MAIN"
+    },
+    {
+      "matches": ["https://play.kittyverse.ai/*"],
+      "js": ["kitty-verse.js"],
+      "run_at": "document_start",
+      "all_frames": true,
       "world": "MAIN"
     }
   ],
