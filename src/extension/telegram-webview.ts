@@ -1,3 +1,4 @@
+// @ts-ignore
 function injectScript(content: string) {
   const script = document.createElement('script');
   script.textContent = content;
