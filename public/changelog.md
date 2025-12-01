@@ -1,6 +1,14 @@
 # Changelog
 
-## [1.4.0] - 2024-26-11
+## [1.5.0] - 2025-01-30
+
+### Added
+
+- Added support for Kitty Verse game (https://play.kittyverse.ai/*)
+- Touch API emulation for desktop browsers to support touch-based games
+- Touch device detection bypass for games requiring mobile platform
+
+## [1.4.0] - 2024-11-26
 
 ### Added
 
