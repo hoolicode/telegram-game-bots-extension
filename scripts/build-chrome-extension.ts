@@ -5,7 +5,7 @@ async function buildContentScript(): Promise<unknown> {
     entryPoints: ['src/extension/content.ts'],
     bundle: true,
     write: true,
-    outdir: 'dist/hamster-combat-extension/browser/',
+    outdir: 'dist/telegram-game-bots-extension/browser/',
   });
 }
 
@@ -14,7 +14,7 @@ async function buildTelegramWebviewContentScript(): Promise<unknown> {
     entryPoints: ['src/extension/telegram-webview.ts'],
     bundle: true,
     write: true,
-    outdir: 'dist/hamster-combat-extension/browser/',
+    outdir: 'dist/telegram-game-bots-extension/browser/',
   });
 }
 
@@ -23,7 +23,7 @@ async function buildKittyVerseContentScript(): Promise<unknown> {
     entryPoints: ['src/extension/kitty-verse.ts'],
     bundle: true,
     write: true,
-    outdir: 'dist/hamster-combat-extension/browser/',
+    outdir: 'dist/telegram-game-bots-extension/browser/',
   });
 }
 
@@ -32,7 +32,7 @@ async function buildBackgroundScript(): Promise<unknown> {
     entryPoints: ['src/extension/background.ts'],
     bundle: true,
     write: true,
-    outdir: 'dist/hamster-combat-extension/browser/',
+    outdir: 'dist/telegram-game-bots-extension/browser/',
   });
 }
 

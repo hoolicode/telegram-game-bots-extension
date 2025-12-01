@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "hamster-combat-extension": {
+    "telegram-game-bots-extension": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular/build:application",
           "options": {
-            "outputPath": "dist/hamster-combat-extension",
+            "outputPath": "dist/telegram-game-bots-extension",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
@@ -69,10 +69,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "hamster-combat-extension:build:production"
+              "buildTarget": "telegram-game-bots-extension:build:production"
             },
             "development": {
-              "buildTarget": "hamster-combat-extension:build:development"
+              "buildTarget": "telegram-game-bots-extension:build:development"
             }
           },
           "defaultConfiguration": "development"
